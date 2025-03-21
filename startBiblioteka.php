@@ -1,4 +1,4 @@
-<?php include 'bazaMM.php'; ?>
+<?php include 'baza.php'; ?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -12,15 +12,15 @@
         <h1>Biblioteka Mykhailenko</h1>
         <nav>
             <a href="startBiblioteka.php">Strona główna</a>
-            <a href="autorzyMM.php">Autorzy</a>
-            <a href="ksiazkiMM.php">Książki</a>
-            <a href="czytelnicyMM.php">Czytelnicy</a>
-            <a href="wypozyczeniaMM.php">Wypozyczenia</a>
-            <a href="addAutorMM.php">Dodać autora</a>
-            <a href="addKsiazkaMM.php">Dodać książkę</a>
-            <a href="addCzytelnikMM.php">Dodać czytelnika</a>
-            <a href="addWypozycelnikaMM.php">Dodaj wypożyczenie</a>
-            <a href="returnBookMM.php">Usuń wypożyczenie</a>
+            <a href="autorzy.php">Autorzy</a>
+            <a href="ksiazki.php">Książki</a>
+            <a href="czytelnicy.php">Czytelnicy</a>
+            <a href="wypozyczenia.php">Wypozyczenia</a>
+            <a href="addAutor.php">Dodać autora</a>
+            <a href="addKsiazka.php">Dodać książkę</a>
+            <a href="addCzytelnik.php">Dodać czytelnika</a>
+            <a href="addWypozycelnika.php">Dodaj wypożyczenie</a>
+            <a href="returnBook.php">Usuń wypożyczenie</a>
             
         </nav>
     </header>

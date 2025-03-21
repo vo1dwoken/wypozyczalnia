@@ -1,5 +1,5 @@
 <?php
-include 'bazaMM.php';
+include 'baza.php';
 session_start();
 
 if (!isset($_SESSION['admin_id'])) {
@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    $stmt = $conn->prepare("DELETE FROM wypozyczenie_MM WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM wypozyczenie WHERE id = ?");
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {

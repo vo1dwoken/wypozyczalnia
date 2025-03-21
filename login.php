@@ -1,12 +1,12 @@
 <?php
-include 'bazaMM.php';
+include 'baza.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $haslo = $_POST['haslo'];
 
-    $stmt = $conn->prepare("SELECT id, imie, nazwisko, haslo FROM admin_MM WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, imie, nazwisko, haslo FROM adminLog WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->fetch();
 
     if (password_verify($haslo, $hashed_password)) {
-        $_SESSION['admin_id'] = $id;
-        $_SESSION['admin_name'] = $imie . " " . $nazwisko;
+        $_SESSION['adminLog_id'] = $id;
+        $_SESSION['adminLog_name'] = $imie . " " . $nazwisko;
         header("Location: adminPanel.php");
         exit();
     } else {
