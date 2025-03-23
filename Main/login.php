@@ -2,6 +2,7 @@
 include 'baza.php';
 session_start();
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $haslo = $_POST['haslo'];
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (password_verify($haslo, $hashed_password)) {
         $_SESSION['adminLog_id'] = $id;
         $_SESSION['adminLog_name'] = $imie . " " . $nazwisko;
-        header("Location: adminPanel.php");
+        header("Location: /Main/adminPanel.php");
         exit();
     } else {
         echo "Błędny email lub hasło.";
@@ -26,10 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <title>Logowanie dla adminów</title>
 </head>
+
 <body>
     <h2>Logowanie (Tylko dla administratorów)</h2>
     <form method="POST">
@@ -40,4 +43,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Zaloguj się</button>
     </form>
 </body>
+
 </html>

@@ -2,7 +2,7 @@
 include 'baza.php';
 session_start();
 
-if (!isset($_SESSION['admin_id'])) {
+if (!isset($_SESSION['adminLog_id'])) {
     header("Location: login.php");
     exit();
 }
