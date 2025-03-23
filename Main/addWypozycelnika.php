@@ -4,10 +4,10 @@ include 'baza.php';
 if (isset($_POST['addRental'])) {
     $czytelnik_id = intval($_POST['czytelnik_nazwisko']);
     $ksiazka_id = intval($_POST['ksiazka_tytul']);
-    $ilosc_pozyczona = intval($_POST['ilosc']); // Кількість книг, які хочете позичити.
+    $ilosc_pozyczona = intval($_POST['ilosc']); // Liczba książek do wypożyczenia
 
-    // Перевіряємо, чи є така книга в наявності.
-    $stmt = $conn->prepare("SELECT ilosc FROM ksiazka WHERE id = ?");
+    // Sprawdzamy, czy książka jest dostępna
+    $stmt = $conn->prepare("SELECT ilosc_dostepnych FROM ksiazka WHERE id = ?");
     $stmt->bind_param("i", $ksiazka_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -15,18 +15,18 @@ if (isset($_POST['addRental'])) {
 
     if (!$ksiazka) {
         echo "<p>Błąd: Nie znaleziono książki o podanym ID.</p>";
-    } elseif ($ksiazka['ilosc'] < $ilosc_pozyczona) {
-        echo "<p>Błąd: Niewystarczająca liczba książek w bibliotece. Dostępne: " . htmlspecialchars($ksiazka['ilosc']) . ".</p>";
+    } elseif ($ksiazka['ilosc_dostepnych'] < $ilosc_pozyczona) {
+        echo "<p>Błąd: Niewystarczająca liczba książek w bibliotece. Dostępne: " . htmlspecialchars($ksiazka['ilosc_dostepnych']) . ".</p>";
     } else {
-        // Додаємо позичання.
-        $stmt = $conn->prepare("INSERT INTO wypozyczenie (czytelnik_id, ksiazka_id, ilosc) VALUES (?, ?, ?)");
-        $stmt->bind_param("iii", $czytelnik_id, $ksiazka_id, $ilosc_pozyczona);
+        // Dodajemy wypożyczenie
+        $stmt = $conn->prepare("INSERT INTO wypozyczenie (czytelnik_id, ksiazka_id) VALUES (?, ?)");
+        $stmt->bind_param("ii", $czytelnik_id, $ksiazka_id);
         if ($stmt->execute()) {
-            // Оновлюємо кількість книг у базі даних.
-            $stmt = $conn->prepare("UPDATE ksiazka SET ilosc = ilosc - ? WHERE id = ?");
+            // Aktualizujemy ilość dostępnych książek
+            $stmt = $conn->prepare("UPDATE ksiazka SET ilosc_dostepnych = ilosc_dostepnych - ? WHERE id = ?");
             $stmt->bind_param("ii", $ilosc_pozyczona, $ksiazka_id);
             if ($stmt->execute()) {
-                echo "<p>Wypożyczenie dodane pomyślnie! Pozostało książek: " . ($ksiazka['ilosc'] - $ilosc_pozyczona) . ".</p>";
+                echo "<p>Wypożyczenie dodane pomyślnie! Pozostało książek: " . ($ksiazka['ilosc_dostepnych'] - $ilosc_pozyczona) . ".</p>";
             } else {
                 echo "<p>Błąd: Nie udało się zaktualizować ilości książek.</p>";
             }

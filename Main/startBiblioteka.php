@@ -29,7 +29,7 @@
         <p>Wybierz sekcję z menu, aby wyświetlić informacje lub dodać nowe wpisy.</p>
     </main>
     <footer>
-        <p>© 2024 Mykhailenko. Wszelkie prawa zastrzeżone.</p>
+        <p>© 2024. Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
 </html>

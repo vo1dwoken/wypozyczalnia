@@ -13,8 +13,8 @@
         <nav>
             <a href="../startBiblioteka.html">Strona główna</a>
             <a href="ksiazki.php">Książki</a>
-            <a href="wypozyczenia.php">Wypozyczenia</a>
             <a href="autorzy.php">Autorzy</a>
+            <a href="wypozyczenia.php">Moje wypozyczenia</a>
         </nav>
     </header>
     <main>
@@ -32,13 +32,12 @@
             <tbody>
                 <?php
                 $query = "
-                    SELECT autor.id, autor.nazwisko, autor.imie, 
+                    SELECT ksiazka.id, autor.nazwisko, autor.imie, 
                     COALESCE(ksiazka.tytul, 'Brak książki') AS tytul, 
                     COALESCE(CAST(ksiazka.rok_wydania AS CHAR), '-') AS rok_wydania
                     FROM autor
                     LEFT JOIN ksiazka ON autor.id = ksiazka.autor_id
-                    ORDER BY autor.id ASC
-
+                    ORDER BY ksiazka.id ASC
                 ";
         
                 $result = $conn->query($query);

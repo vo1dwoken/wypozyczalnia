@@ -112,3 +112,12 @@ SELECT w.id, c.nazwisko AS czytelnik, k.tytul AS ksiazka
 FROM wypozyczenie w
 JOIN czytelnik c ON w.czytelnik_id = c.id
 JOIN ksiazka k ON w.ksiazka_id = k.id;
+
+/*Додав у таблицю книжки к-сть доступних книг та наявність книг у бібліотеці*/
+ALTER TABLE ksiazka 
+ADD COLUMN ilosc_dostepnych INT NOT NULL DEFAULT 0,
+ADD COLUMN dostepnosc BOOLEAN NOT NULL DEFAULT TRUE;
+
+/* Додав загальну к-сть книг враховуючи позичені та наявні книжки*/ 
+ALTER TABLE ksiazka 
+ADD COLUMN ilosc_calkowita INT NOT NULL DEFAULT 0;

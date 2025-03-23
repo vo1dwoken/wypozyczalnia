@@ -50,27 +50,29 @@ if (empty($_SESSION['csrf_token'])) {
             <label for="rok_wydania">Rok wydania:</label>
             <input type="number" id="rok_wydania" name="rok_wydania" required>
             <br>
+            <label for="ilosc_calkowita">Ilość całkowita:</label>
+            <input type="number" id="ilosc_calkowita" name="ilosc_calkowita" required>
+            <br>
             <button type="submit" name="addBook">Dodać książkę</button>
         </form>
 
         <?php
         if (isset($_POST['addBook'])) {
-       
             if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
                 die("Nieprawidłowy token CSRF!");
             }
-
-           
+        
             $tytul = htmlspecialchars($_POST['tytul']);
             $autor = htmlspecialchars($_POST['autor']);
             $wydawca = htmlspecialchars($_POST['wydawca']);
             $tematyka = htmlspecialchars($_POST['tematyka']);
-            $rok_wydania = intval($_POST['rok_wydania']);
-
+            $rok_wydania = max(0, intval($_POST['rok_wydania']));
+            $ilosc_calkowita = max(0, intval($_POST['ilosc_calkowita']));
+            $ilosc_dostepnych = $ilosc_calkowita;
+            
             if ($rok_wydania <= 0) {
                 die("Nieprawidłowy rok wydania.");
             }
-
             
             $autor_data = explode(" ", $autor, 2);
             if (count($autor_data) < 2) {
@@ -78,7 +80,6 @@ if (empty($_SESSION['csrf_token'])) {
             }
             $autor_imie = $autor_data[0];
             $autor_nazwisko = $autor_data[1];
-
             
             $stmt = $conn->prepare("SELECT id FROM autor WHERE imie = ? AND nazwisko = ?");
             $stmt->bind_param("ss", $autor_imie, $autor_nazwisko);
@@ -92,7 +93,6 @@ if (empty($_SESSION['csrf_token'])) {
                 $autor_id = $stmt->insert_id;
             }
             $stmt->close();
-
             
             $stmt = $conn->prepare("SELECT id FROM wydawca WHERE nazwa = ?");
             $stmt->bind_param("s", $wydawca);
@@ -106,7 +106,6 @@ if (empty($_SESSION['csrf_token'])) {
                 $wydawca_id = $stmt->insert_id;
             }
             $stmt->close();
-
             
             $stmt = $conn->prepare("SELECT id FROM tematyka WHERE nazwa = ?");
             $stmt->bind_param("s", $tematyka);
@@ -120,18 +119,19 @@ if (empty($_SESSION['csrf_token'])) {
                 $tematyka_id = $stmt->insert_id;
             }
             $stmt->close();
-
             
-            $stmt = $conn->prepare("INSERT INTO ksiazka (tytul, autor_id, wydawca_id, tematyka_id, rok_wydania) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("siiii", $tytul, $autor_id, $wydawca_id, $tematyka_id, $rok_wydania);
-
+            $stmt = $conn->prepare("INSERT INTO ksiazka (tytul, autor_id, wydawca_id, tematyka_id, rok_wydania, ilosc_calkowita, ilosc_dostepnych) 
+                                    VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("siiiiii", $tytul, $autor_id, $wydawca_id, $tematyka_id, $rok_wydania, $ilosc_calkowita, $ilosc_dostepnych);
+            
             if ($stmt->execute()) {
                 echo "<p>Książka została pomyślnie dodana!</p>";
             } else {
                 echo "<p>Wystąpił problem z dodaniem książki. Błąd: " . htmlspecialchars($conn->error) . "</p>";
             }
+            $stmt->close();
         }
-        ?>
+        ?>        
     </main>
     <footer>
         <p>© 2024 Wszelkie prawa zastrzeżone.</p>
