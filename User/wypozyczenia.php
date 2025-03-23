@@ -10,12 +10,7 @@
 <body>
     <header>
         <h1>Wypozyczenia</h1>
-        <nav>
-            <a href="../startBiblioteka.html">Strona główna</a>
-            <a href="ksiazki.php">Książki</a>
-            <a href="autorzy.php">Autorzy</a>
-            <a href="wypozyczenia.php">Moje wypozyczenia</a>
-        </nav>
+        <?php include 'navigation.php'; ?>
     </header>
     <main>
         <h2>Lista wypozyczeń</h2>
