@@ -48,18 +48,8 @@ if (isset($_POST['addRental'])) {
 <body>
     <header>
         <h1>Dodaj wypożyczenie</h1>
-        <nav>
-            <a href="startBiblioteka.php">Strona główna</a>
-            <a href="autorzy.php">Autorzy</a>
-            <a href="ksiazki.php">Książki</a>
-            <a href="czytelnicy.php">Czytelnicy</a>
-            <a href="wypozyczenia.php">Wypożyczenia</a>
-            <a href="addAutor.php">Dodaj autora</a>
-            <a href="addKsiazka.php">Dodaj książkę</a>
-            <a href="addCzytelnik.php">Dodaj czytelnika</a>
-            <a href="addWypozycelnika.php">Dodaj wypożyczenie</a>
-            <a href="returnBook.php">Usuń wypożyczenie</a>
-        </nav>
+        <?php include 'buttonLogOutInReg.php'; ?>
+        <?php include 'navigation.php'; ?>
     </header>
     <main>
         <h2>Dodaj nowe wypożyczenie:</h2>

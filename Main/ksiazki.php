@@ -10,19 +10,8 @@
 <body>
     <header>
         <h1>Książki</h1>
-        <nav>
-            <a href="startBiblioteka.php">Strona główna</a>
-            <a href="autorzy.php">Autorzy</a>
-            <a href="ksiazki.php">Książki</a>
-            <a href="czytelnicy.php">Czytelnicy</a>
-            <a href="wypozyczenia.php">Wypozyczenia</a>
-            <a href="addAutor.php">Dodać autora</a>
-            <a href="addKsiazka.php">Dodać książkę</a>
-            <a href="addCzytelnik.php">Dodać czytelnika</a>
-            <a href="addWypozycelnika.php">Dodaj wypożyczenie</a>
-            <a href="returnBook.php">Usuń wypożyczenie</a>
-            
-        </nav>
+        <?php include 'buttonLogOutInReg.php'; ?>
+        <?php include 'navigation.php'; ?>
     </header>
     <main>
         <h2>Lista książek</h2>
