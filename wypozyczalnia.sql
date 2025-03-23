@@ -121,3 +121,13 @@ ADD COLUMN dostepnosc BOOLEAN NOT NULL DEFAULT TRUE;
 /* Додав загальну к-сть книг враховуючи позичені та наявні книжки*/ 
 ALTER TABLE ksiazka 
 ADD COLUMN ilosc_calkowita INT NOT NULL DEFAULT 0;
+
+ALTER TABLE czytelnik 
+ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE,
+ADD COLUMN haslo VARCHAR(255) NOT NULL;
+
+DELETE FROM czytelnik;
+
+INSERT INTO czytelnik (nazwisko, ulica_id, ulica_numer, mieszkanie_numer, email, haslo) 
+VALUES ('Kowalski', 2, '20', '12', 'user@example.com', 
+        '$2y$10$g5vT5JzX5X/jRYPzPzHkOugZG2xl5slGz53GmKX9XU7GdTJDf3eCe');
