@@ -48,8 +48,12 @@ $readers = $conn->query("SELECT id, nazwisko FROM czytelnik ORDER BY nazwisko");
 </head>
 <body>
      <header>
-        <h1>Zwrot książki</h1>
-        <?php include 'buttonLogOutInReg.php'; ?>
+        
+         <div class="header-container">
+            <img src="../logo.png" alt="Logo" class="logo">
+          <h1>Zwrot książki</h1>
+            <?php include 'buttonLogOutInReg.php'; ?>
+        </div>
         <?php include 'navigation.php'; ?>
     </header>
     <main>
@@ -117,7 +121,7 @@ $readers = $conn->query("SELECT id, nazwisko FROM czytelnik ORDER BY nazwisko");
         ?>
     </main>
     <footer>
-        <p>© 2024 Wszelkie prawa zastrzeżone.</p>
+        <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
 </html>

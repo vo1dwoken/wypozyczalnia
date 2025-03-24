@@ -12,12 +12,16 @@ if (empty($_SESSION['csrf_token'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Dodaj czytelnika</title>
+    <title>Dodać czytelnika</title>
 </head>
 <body>
     <header>
-        <h1>Dodać czytelnika</h1>
-        <?php include 'buttonLogOutInReg.php'; ?>
+        
+        <div class="header-container">
+            <img src="../logo.png" alt="Logo" class="logo">
+          <h1>Dodać czytelnika</h1>
+            <?php include 'buttonLogOutInReg.php'; ?>
+        </div>
         <?php include 'navigation.php'; ?>
     </header>
     <main>
@@ -93,7 +97,7 @@ if (empty($_SESSION['csrf_token'])) {
         ?>
     </main>
     <footer>
-        <p>© 2024 Wszelkie prawa zastrzeżone.</p>
+        <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
 </html>
