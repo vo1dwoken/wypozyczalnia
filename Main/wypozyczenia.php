@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 <?php
-                $result = $conn->query("SELECT w.id, c.nazwisko AS czytelnik, k.tytul AS ksiazka
+                $result = $conn->query("SELECT w.id, CONCAT(c.imie, ' ', c.nazwisko) AS pelne_imie, k.tytul AS ksiazka
                                         FROM wypozyczenie w
                                         JOIN czytelnik c ON w.czytelnik_id = c.id
                                         JOIN ksiazka k ON w.ksiazka_id = k.id");
@@ -36,7 +36,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>
                                 <td>" . htmlspecialchars($row['id']) . "</td>
-                                <td>" . htmlspecialchars($row['czytelnik']) . "</td>
+                                <td>" . htmlspecialchars($row['pelne_imie']) . "</td>
                                 <td>" . htmlspecialchars($row['ksiazka']) . "</td>
                               </tr>";
                     }

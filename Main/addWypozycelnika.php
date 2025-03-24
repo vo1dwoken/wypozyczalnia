@@ -61,9 +61,9 @@ if (isset($_POST['addRental'])) {
             <select id="czytelnik_nazwisko" name="czytelnik_nazwisko" required>
                 <option value="">-- Wybierz czytelnika --</option>
                 <?php
-                $result = $conn->query("SELECT id, nazwisko FROM czytelnik");
+                $result = $conn->query("SELECT id, CONCAT(imie, ' ', nazwisko) AS pelne_imie FROM czytelnik");
                 while ($row = $result->fetch_assoc()) {
-                    echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['nazwisko']) . "</option>";
+                    echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['pelne_imie']) . "</option>";
                 }
                 ?>
             </select>

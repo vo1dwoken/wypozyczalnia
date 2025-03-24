@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nazwisko</th>
+                    <th>Imie Nazwisko</th>
                     <th>Ulica</th>
                     <th>Numer ulicy</th>
                     <th>Numer mieszkania</th>
@@ -31,14 +31,14 @@
             </thead>
             <tbody>
                 <?php
-                $result = $conn->query("SELECT c.id, c.nazwisko, u.nazwa AS ulica, c.ulica_numer, c.mieszkanie_numer, c.email
+                $result = $conn->query("SELECT c.id, CONCAT(c.imie, ' ', c.nazwisko) AS pelne_imie, u.nazwa AS ulica, c.ulica_numer, c.mieszkanie_numer, c.email
                                         FROM czytelnik c
                                         JOIN ulica u ON c.ulica_id = u.id");
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>
                                 <td>" . htmlspecialchars($row['id']) . "</td>
-                                <td>" . htmlspecialchars($row['nazwisko']) . "</td>
+                                <td>" . htmlspecialchars($row['pelne_imie']) . "</td>
                                 <td>" . htmlspecialchars($row['ulica']) . "</td>
                                 <td>" . htmlspecialchars($row['ulica_numer']) . "</td>
                                 <td>" . htmlspecialchars($row['mieszkanie_numer']) . "</td>

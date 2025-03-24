@@ -35,7 +35,7 @@ if (isset($_POST['returnBook'])) {
 }
 
 
-$readers = $conn->query("SELECT id, nazwisko FROM czytelnik ORDER BY nazwisko");
+$readers = $conn->query("SELECT id, CONCAT(imie, ' ', nazwisko) AS pelne_imie FROM czytelnik ORDER BY nazwisko");
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ $readers = $conn->query("SELECT id, nazwisko FROM czytelnik ORDER BY nazwisko");
                 <?php
                 while ($reader = $readers->fetch_assoc()) {
                     $selected = isset($_GET['czytelnik_id']) && $_GET['czytelnik_id'] == $reader['id'] ? 'selected' : '';
-                    echo "<option value='" . htmlspecialchars($reader['id']) . "' $selected>" . htmlspecialchars($reader['nazwisko']) . "</option>";
+                    echo "<option value='" . htmlspecialchars($reader['id']) . "' $selected>" . htmlspecialchars($reader['pelne_imie']) . "</option>";
                 }
                 ?>
             </select>
