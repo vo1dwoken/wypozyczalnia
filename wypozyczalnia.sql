@@ -76,8 +76,8 @@ INSERT INTO tematyka (nazwa) VALUES
 ('Poezja');
 
 INSERT INTO ksiazka (tytul, autor_id, wydawca_id, rok_wydania, tematyka_id) VALUES 
-('Quo Vadis', 1, 1, 1896, 1),
-('Pan Tadeusz', 2, 2, 1834, 2);
+('Quo Vadis', 1, 1, 1991, 1),
+('Pan Tadeusz', 2, 2, 1990, 2);
 
 INSERT INTO ulica (nazwa) VALUES 
 ('Kwiatowa'),

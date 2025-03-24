@@ -43,12 +43,16 @@ if (isset($_POST['addRental'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Dodaj wypożyczenie</title>
+    <title>Dodać wypożyczenie</title>
 </head>
 <body>
     <header>
-        <h1>Dodaj wypożyczenie</h1>
-        <?php include 'buttonLogOutInReg.php'; ?>
+       
+         <div class="header-container">
+            <img src="../logo.png" alt="Logo" class="logo">
+          <h1>Dodać wypożyczenie</h1>
+            <?php include 'buttonLogOutInReg.php'; ?>
+        </div>
         <?php include 'navigation.php'; ?>
     </header>
     <main>
@@ -83,7 +87,7 @@ if (isset($_POST['addRental'])) {
         </form>
     </main>
     <footer>
-        <p>© 2024 Wszelkie prawa zastrzeżone.</p>
+        <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
 </html>
