@@ -21,7 +21,7 @@ if (isset($_POST['returnBook'])) {
 
     if ($stmt->execute()) {
        
-        $updateStmt = $conn->prepare("UPDATE ksiazka SET ilosc = ilosc + 1 WHERE id = ?");
+        $updateStmt = $conn->prepare("UPDATE ksiazka SET ilosc_dostepnych = ilosc_dostepnych + 1 WHERE id = ?");
         $updateStmt->bind_param("i", $ksiazka_id);
 
         if ($updateStmt->execute()) {
@@ -52,7 +52,6 @@ $readers = $conn->query("SELECT id, nazwisko FROM czytelnik ORDER BY nazwisko");
          <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
           <h1>Zwrot książki</h1>
-            <?php include 'buttonLogOutInReg.php'; ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>

@@ -287,6 +287,36 @@ footer {
      color: #2c3e50;
  }
 
+ form.container {
+    position: absolute; /* робимо форму абсолютною */
+    top: 50%; /* вирівнюємо форму по вертикалі */
+    left: 50%; /* вирівнюємо форму по горизонталі */
+    transform: translate(-50%, -50%); /* переміщаємо форму на центр */
+    background: rgba(255, 255, 255, 0.8); /* додаємо прозорість з альфа-каналом */
+    padding: 30px;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%; /* додаємо ширину */
+    box-sizing: border-box;
+}
+
+#logowanieImage {
+    width: 100%;
+    height: calc(100vh - 57px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    position: relative; 
+    overflow: hidden;
+}
+
+.login-title{
+    text-align: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {

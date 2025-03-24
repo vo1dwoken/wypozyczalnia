@@ -122,12 +122,16 @@ ADD COLUMN dostepnosc BOOLEAN NOT NULL DEFAULT TRUE;
 ALTER TABLE ksiazka 
 ADD COLUMN ilosc_calkowita INT NOT NULL DEFAULT 0;
 
+/*Оскільки андрій це не прописав, то в базу даних попорядку вписуємо ці дані нижче*/
 ALTER TABLE czytelnik 
 ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE,
 ADD COLUMN haslo VARCHAR(255) NOT NULL;
 
-DELETE FROM czytelnik;
-
 INSERT INTO czytelnik (nazwisko, ulica_id, ulica_numer, mieszkanie_numer, email, haslo) 
 VALUES ('Kowalski', 2, '20', '12', 'user@example.com', 
         '$2y$10$g5vT5JzX5X/jRYPzPzHkOugZG2xl5slGz53GmKX9XU7GdTJDf3eCe');
+
+ALTER TABLE czytelnik 
+ADD CONSTRAINT unique_email UNIQUE (email);
+
+/* */

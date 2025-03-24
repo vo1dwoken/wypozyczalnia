@@ -15,7 +15,6 @@
         <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
             <h1>Biblioteka</h1>
-            <?php include 'buttonLogOutInReg.php'; ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>

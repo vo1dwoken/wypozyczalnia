@@ -13,7 +13,6 @@
         <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
             <h1>Czytelnicy</h1>  
-            <?php include 'buttonLogOutInReg.php'; ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>
@@ -27,11 +26,12 @@
                     <th>Ulica</th>
                     <th>Numer ulicy</th>
                     <th>Numer mieszkania</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $result = $conn->query("SELECT c.id, c.nazwisko, u.nazwa AS ulica, c.ulica_numer, c.mieszkanie_numer
+                $result = $conn->query("SELECT c.id, c.nazwisko, u.nazwa AS ulica, c.ulica_numer, c.mieszkanie_numer, c.email
                                         FROM czytelnik c
                                         JOIN ulica u ON c.ulica_id = u.id");
                 if ($result->num_rows > 0) {
@@ -42,6 +42,7 @@
                                 <td>" . htmlspecialchars($row['ulica']) . "</td>
                                 <td>" . htmlspecialchars($row['ulica_numer']) . "</td>
                                 <td>" . htmlspecialchars($row['mieszkanie_numer']) . "</td>
+                                <td>" . htmlspecialchars($row['email']) . "</td>
                               </tr>";
                     }
                 } else {

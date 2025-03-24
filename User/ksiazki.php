@@ -27,7 +27,6 @@
             <th>Wydawca</th>
             <th>Tematy</th>
             <th>Rok publikacji</th>
-            <th>Ilosc dostepnych</th>
             <th>Dostepne</th>
         </tr>
     </thead>
@@ -49,7 +48,6 @@
                         <td>" . htmlspecialchars($row['wydawca']) . "</td>
                         <td>" . htmlspecialchars($row['tematyka']) . "</td>
                         <td>" . htmlspecialchars($row['rok_wydania']) . "</td>
-                        <td>" . htmlspecialchars($row['ilosc_dostepnych']) . "</td>
                         <td>" . $dostepnosc . "</td>
                       </tr>";
             }

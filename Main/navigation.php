@@ -7,7 +7,6 @@
     $nav .= '<a href="wypozyczenia.php">Wypozyczenia</a>';
     $nav .= '<a href="addAutor.php">Dodać autora</a>';
     $nav .= '<a href="addKsiazka.php">Dodać książkę</a>';
-    $nav .= '<a href="addCzytelnik.php">Dodać czytelnika</a>';
     $nav .= '<a href="addWypozycelnika.php">Dodać wypożyczenie</a>';
     $nav .= '<a href="returnBook.php">Usuń wypożyczenie</a>';
     $nav .= '</nav>';
