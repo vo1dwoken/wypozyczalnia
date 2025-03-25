@@ -303,7 +303,7 @@ footer {
 
 #logowanieImage {
     width: 100%;
-    height: calc(100vh - 57px);
+    height: calc(100vh - 1px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -448,4 +448,26 @@ footer {
 
 .admin-logout-button:hover {
     background-color: #c0392b;
+}
+
+.small-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.small-btn {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #2980b9;
+    border: 1px solid #2980b9;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.small-btn:hover {
+    background-color: #2980b9;
+    color: white;
 }
