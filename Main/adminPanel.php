@@ -1,6 +1,11 @@
 <?php
 include 'baza.php';
 session_start();
+if (!isset($_SESSION['adminLog_id'])) {
+    header("Location: /startBiblioteka.php"); // Якщо не адмін, перенаправляємо на головну
+    exit();
+}
+
 
 if (!isset($_SESSION['adminLog_id'])) {
     header("Location: login.php");

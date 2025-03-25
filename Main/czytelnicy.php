@@ -1,18 +1,32 @@
 <?php include 'baza.php'; ?>
+<?php
+session_start();
+if (!isset($_SESSION['adminLog_id'])) {
+    header("Location: /startBiblioteka.php"); // Якщо не адмін, перенаправляємо на головну
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Czytelnicy</title>
 </head>
+
 <body>
     <header>
-        
+
         <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
-            <h1>Czytelnicy</h1>  
+            <h1>Czytelnicy</h1>
+            <?php
+            if (isset($_SESSION['adminLog_id'])) {
+                echo '<a href="logout.php" class="admin-logout-button">Wyloguj się</a>';
+            }
+            ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>
@@ -53,7 +67,8 @@
         </table>
     </main>
     <footer>
-        <p>© 2025  Wszelkie prawa zastrzeżone.</p>
+        <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
+
 </html>

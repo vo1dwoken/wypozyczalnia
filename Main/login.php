@@ -2,7 +2,6 @@
 include 'baza.php';
 session_start();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $haslo = $_POST['haslo'];
@@ -14,13 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_result($id, $imie, $nazwisko, $hashed_password);
     $stmt->fetch();
 
-    if (password_verify($haslo, $hashed_password)) {
-        $_SESSION['adminLog_id'] = $id;
-        $_SESSION['adminLog_name'] = $imie . " " . $nazwisko;
-        header("Location: /Main/adminPanel.php");
-        exit();
+    if ($stmt->num_rows > 0) {  // Перевіряємо, чи знайдено запис
+        if (password_verify($haslo, $hashed_password)) {
+            $_SESSION['adminLog_id'] = $id;
+            $_SESSION['adminLog_name'] = $imie . " " . $nazwisko;
+            header("Location: startBiblioteka.php");
+            exit();
+        } else {
+            echo "Błędne hasło.";
+        }
     } else {
-        echo "Błędny email lub hasło.";
+        echo "Błędny email.";
     }
 }
 ?>
@@ -42,6 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" name="haslo" required><br>
         <button type="submit">Zaloguj się</button>
     </form>
+
+    <a href="../startBiblioteka.php">Home</a>
 </body>
 
 </html>

@@ -1,6 +1,10 @@
 <?php
 include 'baza.php';
 session_start();
+if (!isset($_SESSION['adminLog_id'])) {
+    header("Location: /startBiblioteka.php"); // Якщо не адмін, перенаправляємо на головну
+    exit();
+}
 
 if (!isset($_SESSION['admin_id'])) {
     die("Brak dostępu.");
@@ -17,4 +21,3 @@ if (isset($_GET['id'])) {
         echo "Błąd przy usuwaniu.";
     }
 }
-?>

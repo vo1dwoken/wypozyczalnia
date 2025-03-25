@@ -1,6 +1,12 @@
 <?php
 include 'baza.php';
+
 session_start();
+if (!isset($_SESSION['adminLog_id'])) {
+    header("Location: /startBiblioteka.php"); // Якщо не адмін, перенаправляємо на головну
+    exit();
+}
+
 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -8,18 +14,25 @@ if (empty($_SESSION['csrf_token'])) {
 ?>
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Dodać autora</title>
 </head>
+
 <body>
     <header>
-        
-         <div class="header-container">
+
+        <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
             <h1>Dodać autora</h1>
+            <?php
+            if (isset($_SESSION['adminLog_id'])) {
+                echo '<a href="logout.php" class="admin-logout-button">Wyloguj się</a>';
+            }
+            ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>
@@ -45,7 +58,7 @@ if (empty($_SESSION['csrf_token'])) {
             $imie = htmlspecialchars($_POST['imie']);
             $nazwisko = htmlspecialchars($_POST['nazwisko']);
 
-           
+
             if (!preg_match("/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s-]+$/u", $imie)) {
                 die("Nieprawidłowe imię.");
             }
@@ -69,4 +82,5 @@ if (empty($_SESSION['csrf_token'])) {
         <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
+
 </html>

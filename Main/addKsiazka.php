@@ -1,6 +1,10 @@
 <?php
 include 'baza.php';
 session_start();
+if (!isset($_SESSION['adminLog_id'])) {
+    header("Location: /startBiblioteka.php"); // Якщо не адмін, перенаправляємо на головну
+    exit();
+}
 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -8,18 +12,26 @@ if (empty($_SESSION['csrf_token'])) {
 ?>
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Dodać książkę</title>
 </head>
+
 <body>
     <header>
-        
-         <div class="header-container">
+
+        <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
-           <h1>Dodać książkę</h1>
+            <h1>Dodać książkę</h1>
+
+            <?php
+            if (isset($_SESSION['adminLog_id'])) {
+                echo '<a href="logout.php" class="admin-logout-button">Wyloguj się</a>';
+            }
+            ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>
@@ -53,7 +65,7 @@ if (empty($_SESSION['csrf_token'])) {
             if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
                 die("Nieprawidłowy token CSRF!");
             }
-        
+
             $tytul = htmlspecialchars($_POST['tytul']);
             $autor = htmlspecialchars($_POST['autor']);
             $wydawca = htmlspecialchars($_POST['wydawca']);
@@ -61,18 +73,18 @@ if (empty($_SESSION['csrf_token'])) {
             $rok_wydania = max(0, intval($_POST['rok_wydania']));
             $ilosc_calkowita = max(0, intval($_POST['ilosc_calkowita']));
             $ilosc_dostepnych = $ilosc_calkowita;
-            
+
             if ($rok_wydania <= 0) {
                 die("Nieprawidłowy rok wydania.");
             }
-            
+
             $autor_data = explode(" ", $autor, 2);
             if (count($autor_data) < 2) {
                 die("Proszę podać zarówno imię, jak i nazwisko autora.");
             }
             $autor_imie = $autor_data[0];
             $autor_nazwisko = $autor_data[1];
-            
+
             $stmt = $conn->prepare("SELECT id FROM autor WHERE imie = ? AND nazwisko = ?");
             $stmt->bind_param("ss", $autor_imie, $autor_nazwisko);
             $stmt->execute();
@@ -85,7 +97,7 @@ if (empty($_SESSION['csrf_token'])) {
                 $autor_id = $stmt->insert_id;
             }
             $stmt->close();
-            
+
             $stmt = $conn->prepare("SELECT id FROM wydawca WHERE nazwa = ?");
             $stmt->bind_param("s", $wydawca);
             $stmt->execute();
@@ -98,7 +110,7 @@ if (empty($_SESSION['csrf_token'])) {
                 $wydawca_id = $stmt->insert_id;
             }
             $stmt->close();
-            
+
             $stmt = $conn->prepare("SELECT id FROM tematyka WHERE nazwa = ?");
             $stmt->bind_param("s", $tematyka);
             $stmt->execute();
@@ -111,11 +123,11 @@ if (empty($_SESSION['csrf_token'])) {
                 $tematyka_id = $stmt->insert_id;
             }
             $stmt->close();
-            
+
             $stmt = $conn->prepare("INSERT INTO ksiazka (tytul, autor_id, wydawca_id, tematyka_id, rok_wydania, ilosc_calkowita, ilosc_dostepnych) 
                                     VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("siiiiii", $tytul, $autor_id, $wydawca_id, $tematyka_id, $rok_wydania, $ilosc_calkowita, $ilosc_dostepnych);
-            
+
             if ($stmt->execute()) {
                 echo "<p>Książka została pomyślnie dodana!</p>";
             } else {
@@ -123,10 +135,11 @@ if (empty($_SESSION['csrf_token'])) {
             }
             $stmt->close();
         }
-        ?>        
+        ?>
     </main>
     <footer>
         <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
+
 </html>

@@ -1,5 +1,10 @@
 <?php
 include 'baza.php';
+session_start();
+if (!isset($_SESSION['adminLog_id'])) {
+    header("Location: /startBiblioteka.php"); // Якщо не адмін, перенаправляємо на головну
+    exit();
+}
 
 if (isset($_POST['addRental'])) {
     $czytelnik_id = intval($_POST['czytelnik_nazwisko']);
@@ -39,18 +44,25 @@ if (isset($_POST['addRental'])) {
 
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Dodać wypożyczenie</title>
 </head>
+
 <body>
     <header>
-       
-         <div class="header-container">
+
+        <div class="header-container">
             <img src="../logo.png" alt="Logo" class="logo">
-          <h1>Dodać wypożyczenie</h1>
+            <h1>Dodać wypożyczenie</h1>
+            <?php
+            if (isset($_SESSION['adminLog_id'])) {
+                echo '<a href="logout.php" class="admin-logout-button">Wyloguj się</a>';
+            }
+            ?>
         </div>
         <?php include 'navigation.php'; ?>
     </header>
@@ -89,4 +101,5 @@ if (isset($_POST['addRental'])) {
         <p>© 2025 Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>
+
 </html>

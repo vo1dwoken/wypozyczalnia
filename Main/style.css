@@ -385,3 +385,67 @@ footer {
             height: 40px;
         }
 }
+/* Стилі для посилань логіну та реєстрації */
+/* Стилі для контейнера авторизації (логін, реєстрація, профіль) */
+.auth-container {
+    position: absolute;  /* Робимо контейнер позиціонованим */
+    top: 20px;           /* Відстань від верхнього краю */
+    right: 20px;         /* Відстань від правого краю */
+    display: flex;       /* Використовуємо flex для вирівнювання елементів */
+    align-items: center; /* Вертикальне вирівнювання по центру */
+    gap: 10px;           /* Проміжок між посиланнями */
+}
+
+/* Стилі для посилань логіну та реєстрації */
+.auth-link,
+.profile-link {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.auth-link:hover,
+.profile-link:hover {
+    background-color: #21618c;
+}
+
+.admin-login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.admin-login-button:hover {
+    background-color: #c0392b;
+}
+
+.admin-logout-button {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.admin-logout-button:hover {
+    background-color: #c0392b;
+}
