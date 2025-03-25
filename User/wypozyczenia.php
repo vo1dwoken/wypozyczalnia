@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
             <?php
             if (isset($_SESSION['user_id'])) {
                 // Якщо користувач залогінений, показуємо посилання на профіль
-                echo '<a href="/User/userPanel.php" class="profile-link">Profil użytkownika</a>';
+                echo '<a href="/User/logout.php" class="profile-link">Logout</a>';
             } else {
                 // Якщо користувач не залогінений, показуємо посилання на логін та реєстрацію
                 echo '<a href="/User/loginUser.php" class="auth-link">Logowanie</a> | <a href="/User/registerUser.php" class="auth-link">Rejestracja</a>';
