@@ -8,6 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $haslo = $_POST['haslo'];
     $imie = htmlspecialchars($_POST['imie']);
     $nazwisko = htmlspecialchars($_POST['nazwisko']);
+    $ulica_nazwa = htmlspecialchars($_POST['ulica_nazwa']);
+    $ulica_numer = htmlspecialchars($_POST['ulica_numer']);
+    $mieszkanie_numer = htmlspecialchars($_POST['mieszkanie_numer']);
 
     // Перевірка, чи вже існує користувач з таким email
     $stmt = $conn->prepare("SELECT id FROM czytelnik WHERE email = ?");
@@ -16,19 +19,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        echo "Email już istnieje!";
+        $error_message = "Email już istnieje!";
     } else {
+        // Перевіряємо, чи існує вулиця, якщо ні – додаємо
+        $stmt = $conn->prepare("SELECT id FROM ulica WHERE nazwa = ?");
+        $stmt->bind_param("s", $ulica_nazwa);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($ulica_id);
+            $stmt->fetch();
+        } else {
+            // Додаємо нову вулицю в таблицю
+            $stmt = $conn->prepare("INSERT INTO ulica (nazwa) VALUES (?)");
+            $stmt->bind_param("s", $ulica_nazwa);
+            $stmt->execute();
+            $ulica_id = $stmt->insert_id; // Отримуємо ID нової вулиці
+        }
+
         // Хешуємо пароль
         $hashed_password = password_hash($haslo, PASSWORD_DEFAULT);
 
         // Додаємо користувача в базу даних
-        $stmt = $conn->prepare("INSERT INTO czytelnik (email, haslo, imie, nazwisko) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $email, $hashed_password, $imie, $nazwisko);
+        $stmt = $conn->prepare("INSERT INTO czytelnik (imie, nazwisko, ulica_id, ulica_numer, mieszkanie_numer, email, haslo) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssiisss", $imie, $nazwisko, $ulica_id, $ulica_numer, $mieszkanie_numer, $email, $hashed_password);
 
         if ($stmt->execute()) {
-            echo "Rejestracja zakończona sukcesem! <a href='loginUser.php'>Zaloguj się</a>";
+            header("Location: loginUser.php?registered=1"); // Перенаправляємо на логін
+            exit();
         } else {
-            echo "Błąd: " . $conn->error;
+            $error_message = "Błąd rejestracji: " . $conn->error;
         }
     }
 }

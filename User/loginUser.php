@@ -56,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Logowanie użytkownika</title>
     <link rel="stylesheet" href="../Main/style.css" />
-    <?php include 'navigation.php'; ?>
 </head>
 
 <body>
@@ -77,6 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <i class="bx bxs-lock-alt"></i>
         </section>
         <button class="login-button" type="submit">Login</button>
+        <div class="small-buttons">
+            <a href="../startBiblioteka.php" class="small-btn">Home</a>
+            <a href="registerUser.php" class="small-btn">Register</a>
+        </div>
     </form>
 </body>
 
