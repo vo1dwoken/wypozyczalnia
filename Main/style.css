@@ -332,70 +332,6 @@ footer {
     text-align: center;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    nav {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-
-    form {
-        margin: 20px 10px;
-        padding: 20px;
-    }
-
-    table th,
-    table td {
-        font-size: 0.9rem;
-        padding: 12px;
-    }
-
-    #Login,
-    #Regin {
-        position: static;
-        display: inline-block;
-        margin-top: 10px;
-    }
-
-         .info-section {
-             justify-content: center;
-         }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 0.95rem;
-    }
-
-    table {
-        font-size: 0.9rem;
-    }
-
-    nav a {
-        font-size: 0.95rem;
-    }
-
-        .info-box img {
-            width: 40px;
-            height: 40px;
-        }
-}
-/* Стилі для посилань логіну та реєстрації */
-/* Стилі для контейнера авторизації (логін, реєстрація, профіль) */
-.auth-container {
-    position: absolute;  /* Робимо контейнер позиціонованим */
-    top: 20px;           /* Відстань від верхнього краю */
-    right: 20px;         /* Відстань від правого краю */
-    display: flex;       /* Використовуємо flex для вирівнювання елементів */
-    align-items: center; /* Вертикальне вирівнювання по центру */
-    gap: 10px;           /* Проміжок між посиланнями */
-}
-
 /* Стилі для посилань логіну та реєстрації */
 .auth-link,
 .profile-link {
@@ -448,4 +384,59 @@ footer {
 
 .admin-logout-button:hover {
     background-color: #c0392b;
+}
+
+#h2Reje{
+    text-align: center;
+}
+
+.auth-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Відображення в колонку на малих екранах */
+@media (max-width: 768px) {
+    .auth-container {
+        position: static;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .auth-link,
+    .profile-link,
+    .admin-login-button,
+    .admin-logout-button {
+        width: auto; /* Робимо кнопки не на всю ширину */
+        min-width: 150px; /* Мінімальна ширина для гарного вигляду */
+        text-align: center;
+        padding: 10px 15px; /* Оптимальний відступ */
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        font-size: 0.95rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    nav a {
+        font-size: 0.95rem;
+    }
+
+        .info-box img {
+            width: 40px;
+            height: 40px;
+        }
 }

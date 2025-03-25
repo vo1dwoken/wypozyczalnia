@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($haslo, $hashed_password)) {
             $_SESSION['user_id'] = $id;
             $_SESSION['user_name'] = $imie . " " . $nazwisko;
-            header("Location: /User/wypozyczenia.php");  // Перенаправлення на панель користувача
+            header("Location: wypozyczenia.php");  // Перенаправлення на панель користувача
             exit();
         } else {
             echo "Błędne hasło dla użytkownika.";
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($haslo, $admin_hashed_password)) {
             $_SESSION['adminLog_id'] = $admin_id;
             $_SESSION['adminLog_name'] = $admin_imie . " " . $admin_nazwisko;
-            header("Location: /Main/startBiblioteka.php");  // Перенаправлення на панель адміністратора
+            header("Location: ../Main/startBiblioteka.php");  // Перенаправлення на панель адміністратора
             exit();
         } else {
             echo "Błędne hasło dla administratora.";

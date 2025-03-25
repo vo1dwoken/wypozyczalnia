@@ -45,7 +45,8 @@ if (!isset($_SESSION['adminLog_id'])) {
                 $result = $conn->query("SELECT w.id, CONCAT(c.imie, ' ', c.nazwisko) AS pelne_imie, k.tytul AS ksiazka
                                         FROM wypozyczenie w
                                         JOIN czytelnik c ON w.czytelnik_id = c.id
-                                        JOIN ksiazka k ON w.ksiazka_id = k.id");
+                                        JOIN ksiazka k ON w.ksiazka_id = k.id
+                                        ORDER BY w.id ASC");
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>

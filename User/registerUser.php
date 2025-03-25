@@ -40,10 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Rejestracja użytkownika</title>
+    <link rel="stylesheet" href="../Main/style.css" />
 </head>
 
 <body>
-    <h2>Rejestracja użytkownika</h2>
+    <h2 id="h2Reje">Rejestracja użytkownika</h2>
     <form method="POST">
         <label>Imię:</label>
         <input type="text" name="imie" required><br>
